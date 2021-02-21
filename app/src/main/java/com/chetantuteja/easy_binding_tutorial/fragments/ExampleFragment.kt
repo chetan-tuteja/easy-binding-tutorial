@@ -1,45 +1,40 @@
 package com.chetantuteja.easy_binding_tutorial.fragments
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.chetantuteja.easy_binding_tutorial.R
-import kotlinx.android.synthetic.main.fragment_example.*
+import com.chetantuteja.easy_binding_tutorial.databinding.FragmentExampleBinding
 
 /**
  * @author Chetan Tuteja (chetan.tuteja@gmail.com)
  * @since 21-Feb-21
  */
-class ExampleFragment : Fragment() {
+class ExampleFragment : BindingFragment<FragmentExampleBinding>() {
 
     companion object {
-        const val TAG = "ExampleFragment"
+        const val TAG = "BindingFragment"
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_example, container, false)
+    override fun setupViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentExampleBinding {
+        return FragmentExampleBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun init() {
         setupViews()
     }
 
     private fun setupViews() {
-        // Set Text using Kotlin Synthetics.
-        tvWelcomeMsg.text = getString(R.string.synthetic_fragment)
+        // Set Text using ViewBinding.
+        binding.tvWelcomeMsg.text = getString(R.string.easy_binding_fragment)
 
-        // Set onClick Action using Kotlin Synthetics.
-        btnShowToast.setOnClickListener {
+        // Set onClick Action using ViewBinding.
+        binding.btnShowToast.setOnClickListener {
             Toast.makeText(
-                requireContext(), getString(R.string.synthetic_fragment),
+                requireContext(), getString(R.string.easy_binding_fragment),
                 Toast.LENGTH_SHORT
             ).show()
         }
